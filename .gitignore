@@ -38,3 +38,6 @@ logs/
 # Không ignore docker-compose.yml (cần commit để dev dùng local)
 # Chỉ ignore override file nếu có
 docker-compose.override.yml
+
+node_modules/
+dist/
