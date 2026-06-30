@@ -1,0 +1,1 @@
+// ScanRequest.java — { assetCode, scannedLocation }

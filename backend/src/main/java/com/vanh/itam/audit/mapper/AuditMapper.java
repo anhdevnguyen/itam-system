@@ -1,0 +1,1 @@
+// AuditMapper.java — MapStruct interface

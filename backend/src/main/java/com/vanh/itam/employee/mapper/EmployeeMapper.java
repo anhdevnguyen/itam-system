@@ -1,0 +1,1 @@
+// EmployeeMapper.java — MapStruct interface

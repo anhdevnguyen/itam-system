@@ -1,0 +1,1 @@
+// MaintenanceMapper.java — MapStruct interface

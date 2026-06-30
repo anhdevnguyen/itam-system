@@ -1,0 +1,1 @@
+// AuthMapper.java — MapStruct interface

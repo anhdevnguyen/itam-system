@@ -1,0 +1,1 @@
+// RequestMapper.java — MapStruct interface

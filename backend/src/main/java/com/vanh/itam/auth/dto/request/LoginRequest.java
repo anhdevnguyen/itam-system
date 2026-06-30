@@ -1,0 +1,1 @@
+// LoginRequest.java — { email, password }

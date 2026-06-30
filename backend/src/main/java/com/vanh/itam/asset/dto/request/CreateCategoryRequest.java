@@ -1,0 +1,1 @@
+// CreateCategoryRequest.java — { code, name }

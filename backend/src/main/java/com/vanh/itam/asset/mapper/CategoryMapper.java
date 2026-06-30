@@ -1,0 +1,1 @@
+// CategoryMapper.java — MapStruct interface

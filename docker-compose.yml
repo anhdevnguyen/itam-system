@@ -1,0 +1,79 @@
+# docker-compose.yml — Local development only
+# Khởi chạy: docker compose up -d
+# Dừng:      docker compose down
+# Reset DB:  docker compose down -v && docker compose up -d
+#
+# Sao chép .env.example → .env trước khi chạy:
+#   cp .env.example .env
+#
+# KHÔNG dùng file này cho Production.
+# Production dùng biến môi trường trên Render/Vercel (xem docs/11-DEPLOYMENT.md mục 2).
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: itam_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-itam_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-itam}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-itam_local_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-itam} -d ${POSTGRES_DB:-itam_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: itam_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Datasource
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-itam_dev}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-itam}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-itam_local_dev}
+
+      # Flyway
+      SPRING_FLYWAY_ENABLED: "true"
+
+      # JWT
+      JWT_SECRET: ${JWT_SECRET:-local-dev-jwt-secret-must-be-at-least-256-bits-long-for-hs256}
+      JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION:-1800000}
+      JWT_REFRESH_TOKEN_EXPIRATION: ${JWT_REFRESH_TOKEN_EXPIRATION:-2592000000}
+
+      # CORS — cho phép Vite dev server (localhost:5173)
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173}
+
+      # Cloudinary (để trống local nếu không test upload ảnh)
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+
+      # SendGrid (để trống local nếu không test gửi email)
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY:-}
+
+      # Spring profile (để trống → dùng config mặc định, không bật JSON logging)
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  pgdata:
+    name: itam_pgdata

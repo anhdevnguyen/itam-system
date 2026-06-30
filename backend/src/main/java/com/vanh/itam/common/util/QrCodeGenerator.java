@@ -1,0 +1,1 @@
+// QrCodeGenerator.java — ZXing wrapper

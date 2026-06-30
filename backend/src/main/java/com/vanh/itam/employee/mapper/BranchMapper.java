@@ -1,0 +1,1 @@
+// BranchMapper.java — MapStruct interface

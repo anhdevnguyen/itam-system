@@ -1,0 +1,1 @@
+// AssetService.java — interface

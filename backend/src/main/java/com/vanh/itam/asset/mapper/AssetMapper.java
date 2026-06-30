@@ -1,0 +1,1 @@
+// AssetMapper.java — MapStruct interface

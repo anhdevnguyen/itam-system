@@ -1,0 +1,1 @@
+// DepartmentMapper.java — MapStruct interface
