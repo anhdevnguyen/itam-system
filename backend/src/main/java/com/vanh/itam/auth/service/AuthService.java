@@ -26,9 +26,6 @@ public interface AuthService {
      * Được lưu tạm trong ThreadLocal hoặc trả qua object wrapper.
      * → Thực tế: login() trả về LoginResponse và Controller tự xử lý cookie;
      *   ta dùng phương án trả Refresh Token trực tiếp qua LoginResult record.
-     */
-
-    /**
      * Xác thực Refresh Token từ cookie, cấp Access Token mới.
      *
      * @param refreshTokenValue giá trị plaintext từ cookie

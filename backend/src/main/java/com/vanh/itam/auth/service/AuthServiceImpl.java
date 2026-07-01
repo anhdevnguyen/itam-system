@@ -28,20 +28,17 @@ import com.vanh.itam.common.util.JwtUtil;
 
 /**
  * Implementation logic xác thực cho ITAM.
- *
  * Login:
  *   1. Tìm employee theo email (chỉ lấy chưa soft-delete)
  *   2. Verify BCrypt password — nếu sai → InvalidCredentialsException (gộp chung 2 lỗi chống user enumeration)
  *   3. Sinh Access Token JWT (30 phút)
  *   4. Sinh Refresh Token opaque (UUID random) + lưu SHA-256 hash vào DB
  *   5. Trả LoginResponse + refresh token plaintext (Controller set cookie)
- *
  * Refresh:
  *   1. Đọc Refresh Token plaintext từ cookie
  *   2. Hash SHA-256 → tra cứu DB
  *   3. Kiểm tra expires_at
  *   4. Sinh Access Token mới — Refresh Token GIỮ NGUYÊN (không rotate ở MVP)
- *
  * Logout:
  *   1. Hash SHA-256 của Refresh Token plaintext
  *   2. Hard delete record khỏi DB (xóa đúng 1 record — thiết bị hiện tại)

@@ -17,6 +17,7 @@ public class Pagination {
     private long totalElements;
     private int totalPages;
 
+    /** Factory từ Spring Page object */
     public static Pagination of(org.springframework.data.domain.Page<?> page) {
         return new Pagination(
                 page.getNumber(),
@@ -24,5 +25,10 @@ public class Pagination {
                 page.getTotalElements(),
                 page.getTotalPages()
         );
+    }
+
+    /** Factory từ 4 tham số rời (dùng trong Controller khi gọi page.getContent() trước) */
+    public static Pagination of(int page, int size, long totalElements, int totalPages) {
+        return new Pagination(page, size, totalElements, totalPages);
     }
 }

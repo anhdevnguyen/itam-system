@@ -27,8 +27,9 @@ public class Department extends BaseEntity {
     /**
      * Manager phụ trách phòng ban — nullable.
      * FK bổ sung qua ALTER TABLE (migration V6) để giải circular dependency.
-     * Dùng managerId (Long) thay vì @ManyToOne để tránh vòng lặp Employee ↔ Department.
+     * FetchType.LAZY để tránh N+1 query.
      */
-    @Column(name = "manager_id")
-    private Long managerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
 }
