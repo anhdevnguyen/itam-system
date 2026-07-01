@@ -65,4 +65,10 @@ public class NotificationServiceImpl implements NotificationService {
     public void markAsRead(Long notificationId, Long employeeId) {
         notificationRepository.markAsRead(notificationId, employeeId);
     }
+
+    @Override
+    @Transactional
+    public void markAllAsRead(Long employeeId) {
+        notificationRepository.markAllAsRead(employeeId);
+    }
 }

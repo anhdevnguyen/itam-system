@@ -40,6 +40,14 @@ public class AuthController {
     @Value("${jwt.refresh-token-expiration}")
     private long refreshTokenExpirationMs;
 
+    /**
+     * true  → thêm "Secure" flag (Production HTTPS).
+     * false → bỏ "Secure" flag (Local HTTP dev).
+     * Cấu hình qua COOKIE_SECURE=false trong .env local (mặc định true cho production).
+     */
+    @Value("${cookie.secure:true}")
+    private boolean cookieSecure;
+
     private static final String REFRESH_TOKEN_COOKIE = "refreshToken";
 
     // ── POST /api/v1/auth/login ───────────────────────────────────────────────
@@ -95,34 +103,34 @@ public class AuthController {
     // ── Private helpers ───────────────────────────────────────────────────────
 
     /**
-     * Set Refresh Token vào httpOnly, Secure, SameSite=Lax cookie.
-     * Các attribute này bảo vệ chống XSS và giảm thiểu CSRF.
+     * Set Refresh Token vào httpOnly cookie bằng 1 Set-Cookie header thủ công duy nhất.
+     *
+     * Lý do dùng header thủ công thay vì response.addCookie():
+     *   - jakarta.servlet.http.Cookie chưa hỗ trợ thuộc tính SameSite.
+     *   - Dùng addCookie() rồi addHeader() sẽ tạo 2 Set-Cookie header trùng lặp.
+     *
+     * Secure flag:
+     *   - Production (HTTPS): COOKIE_SECURE=true  → thêm "; Secure"
+     *   - Local dev (HTTP):   COOKIE_SECURE=false → bỏ "; Secure"
+     *     (Nếu để Secure=true trên HTTP local, browser nhận cookie nhưng không bao giờ
+     *      gửi lại → /auth/refresh luôn thất bại → màn hình trắng sau login)
      */
     private void setRefreshTokenCookie(HttpServletResponse response, String value, int maxAgeSeconds) {
-        Cookie cookie = new Cookie(REFRESH_TOKEN_COOKIE, value);
-        cookie.setHttpOnly(true);           // Không thể đọc bằng JavaScript
-        cookie.setSecure(true);             // Chỉ gửi qua HTTPS
-        cookie.setPath("/api/v1/auth");     // Chỉ gửi tới /api/v1/auth/* (giảm exposure)
-        cookie.setMaxAge(maxAgeSeconds);
-
-        // SameSite=Lax: cân bằng bảo mật CSRF và trải nghiệm cross-site redirect
-        // Spring Boot 3.x Cookie chưa có setters cho SameSite — dùng header thủ công
-        response.addCookie(cookie);
-
-        // Override cookie header để thêm SameSite=Lax
+        String secureFlag = cookieSecure ? "; Secure" : "";
         String cookieHeader = String.format(
-                "%s=%s; Max-Age=%d; Path=/api/v1/auth; HttpOnly; Secure; SameSite=Lax",
-                REFRESH_TOKEN_COOKIE, value, maxAgeSeconds);
+                "%s=%s; Max-Age=%d; Path=/api/v1/auth; HttpOnly%s; SameSite=Lax",
+                REFRESH_TOKEN_COOKIE, value, maxAgeSeconds, secureFlag);
         response.addHeader("Set-Cookie", cookieHeader);
     }
 
     /**
-     * Xóa Refresh Token cookie bằng cách set Max-Age = 0 và value rỗng.
+     * Xóa Refresh Token cookie bằng cách set Max-Age=0.
      */
     private void clearRefreshTokenCookie(HttpServletResponse response) {
+        String secureFlag = cookieSecure ? "; Secure" : "";
         String cookieHeader = String.format(
-                "%s=; Max-Age=0; Path=/api/v1/auth; HttpOnly; Secure; SameSite=Lax",
-                REFRESH_TOKEN_COOKIE);
+                "%s=; Max-Age=0; Path=/api/v1/auth; HttpOnly%s; SameSite=Lax",
+                REFRESH_TOKEN_COOKIE, secureFlag);
         response.addHeader("Set-Cookie", cookieHeader);
     }
 

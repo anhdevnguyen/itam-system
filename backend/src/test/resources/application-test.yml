@@ -1,0 +1,63 @@
+# application-test.yml — Profile test cho Integration Test (Testcontainers)
+# Datasource được ghi đè bởi @DynamicPropertySource trong AbstractIntegrationTest
+# Các external service (Cloudinary, SendGrid) bị disable/mock qua cấu hình riêng
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/itam_test   # placeholder — bị override bởi Testcontainers
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration,classpath:db/test
+    baseline-on-migrate: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 25MB
+
+  # Giúp JVM exit sạch sau khi test kết thúc.
+  # Tomcat graceful shutdown với timeout ngắn — tránh Surefire force-kill JVM fork.
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
+
+server:
+  shutdown: graceful
+
+jwt:
+  secret: 440vageG4ZXFBHQYgKRfc0Vmi7ylJkXgGz63bpyxVOd
+  access-token-expiration: 1800000
+  refresh-token-expiration: 2592000000
+
+cors:
+  allowed-origins: http://localhost:5173
+
+cookie:
+  secure: false
+
+cloudinary:
+  cloud-name: test
+  api-key: test
+  api-secret: test
+
+sendgrid:
+  api-key: test
+
+logging:
+  level:
+    root: WARN
+    com.vanh.itam: INFO
+    org.flywaydb: INFO

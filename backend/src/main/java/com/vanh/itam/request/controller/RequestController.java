@@ -31,13 +31,22 @@ public class RequestController {
     private final RequestService requestService;
 
     @GetMapping
-    @Operation(summary = "Danh sách yêu cầu")
+    @Operation(summary = "Danh sách yêu cầu. EMPLOYEE chỉ thấy request của chính mình.")
     public ResponseEntity<ApiResponse<List<RequestResponse>>> getAll(
             @RequestParam(required = false) RequestStatus status,
             @RequestParam(required = false) Long employeeId,
             @RequestParam(required = false) Long branchId,
-            @PageableDefault(size = 20, sort = "createdAt") Pageable pageable) {
-        Page<RequestResponse> page = requestService.getAll(status, employeeId, branchId, pageable);
+            @PageableDefault(size = 20, sort = "createdAt") Pageable pageable,
+            @AuthenticationPrincipal CustomUserDetails currentUser) {
+
+        // EMPLOYEE chỉ được xem request của chính mình, bất kể client truyền employeeId gì
+        Long effectiveEmployeeId = employeeId;
+        if (currentUser.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
+            effectiveEmployeeId = currentUser.getEmployeeId();
+        }
+
+        Page<RequestResponse> page = requestService.getAll(status, effectiveEmployeeId, branchId, pageable);
         return ResponseEntity.ok(ApiResponse.success(page.getContent(),
                 Pagination.of(page.getNumber(), page.getSize(),
                         page.getTotalElements(), page.getTotalPages())));

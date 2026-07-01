@@ -1,15 +1,16 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/auth/hooks/useAuth.tsx';
 
 /**
  * Route guard — chặn các route cần đăng nhập.
  * - Đang load session → hiển thị spinner
  * - Chưa đăng nhập → redirect /login
- * - mustChangePassword = true → redirect /change-password (ngoại trừ chính trang đó)
+ * - mustChangePassword = true → redirect /change-password (trừ khi đang ở đó rồi)
  * - Đã đăng nhập bình thường → render children qua <Outlet>
  */
 export default function ProtectedRoute() {
   const { isAuthenticated, isLoading, user } = useAuth();
+  const location = useLocation();
 
   if (isLoading) {
     return (
@@ -27,7 +28,9 @@ export default function ProtectedRoute() {
     return <Navigate to="/login" replace />;
   }
 
-  if (user?.mustChangePassword) {
+  // Nếu mustChangePassword = true và chưa ở trang đổi mật khẩu → redirect
+  // Kiểm tra location.pathname để tránh redirect loop khi đã ở /change-password
+  if (user?.mustChangePassword && location.pathname !== '/change-password') {
     return <Navigate to="/change-password" replace />;
   }
 

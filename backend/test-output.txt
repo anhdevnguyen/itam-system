@@ -1,0 +1,500 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< com.vanh:itam >----------------------------
+[INFO] Building itam-system 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ itam ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ itam ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ itam ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ itam ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ itam ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running AssetServiceImpl ù Unit Tests
+[INFO] Running forceReturn()
+mvn : Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases 
+of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: 
+https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+At line:1 char:1
++ mvn test --no-transfer-progress 2>&1 | Out-File -FilePath "D:\PROJECT ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Mockito is curr...ockito.html#0.3:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap 
+classpath has been appended
+WARNING: A Java agent has been loaded dynamically 
+(C:\Users\anhde\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+20:50:26.962 [main] INFO com.vanh.itam.asset.service.AssetServiceImpl -- Force-return executed: assetId=1, previousHolder=5, byItStaff=20, reason=NhΓn viΩn ngh? vi?c
+20:50:26.986 [main] INFO com.vanh.itam.asset.service.AssetServiceImpl -- Force-return executed: assetId=1, previousHolder=5, byItStaff=20, reason=Admin test
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.380 s -- in forceReturn()
+[INFO] Running generateAssetCode()
+20:50:27.017 [main] INFO com.vanh.itam.asset.service.AssetServiceImpl -- Asset created: code=HN-LAP-0007, branchId=1, categoryId=2
+20:50:27.026 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 1: code=HN-LAP-0001
+20:50:27.026 [main] INFO com.vanh.itam.asset.service.AssetServiceImpl -- Asset created: code=HN-LAP-0002, branchId=1, categoryId=2
+20:50:27.032 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 1: code=HN-LAP-0001
+20:50:27.032 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 2: code=HN-LAP-0002
+20:50:27.032 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 3: code=HN-LAP-0003
+20:50:27.032 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 4: code=HN-LAP-0004
+20:50:27.033 [main] WARN com.vanh.itam.asset.service.AssetServiceImpl -- Asset code collision on attempt 5: code=HN-LAP-0005
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in generateAssetCode()
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.439 s -- in AssetServiceImpl ù Unit Tests
+[INFO] Running AuthIntegrationTest ù Login, Refresh, RBAC
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+20:50:27.159 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.vanh.itam.auth.AuthIntegrationTest]: AuthIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:50:27.275 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.vanh.itam.ItamApplication for test class com.vanh.itam.auth.AuthIntegrationTest
+[INFO] Running POST /auth/logout
+20:50:27.361 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.vanh.itam.auth.AuthIntegrationTest$LogoutTests]: LogoutTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:50:27.364 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.vanh.itam.ItamApplication for test class com.vanh.itam.auth.AuthIntegrationTest$LogoutTests
+20:50:27.389 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+20:50:27.392 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+20:50:27.403 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.20.4
+20:50:27.563 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+20:50:27.787 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+20:50:27.788 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+20:50:27.816 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.5.3
+  API Version: 1.54
+  Operating System: Docker Desktop
+  Total Memory: 7784 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+20:50:27.944 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Creating container for image: testcontainers/ryuk:0.11.0
+20:50:28.254 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Container testcontainers/ryuk:0.11.0 is starting: 163eefb4c3d0e5163ebd463b346d037fa24f53474d4b9b150fed6edf84ec35c0
+20:50:28.729 [main] INFO tc.testcontainers/ryuk:0.11.0 -- Container testcontainers/ryuk:0.11.0 started in PT0.7846657S
+20:50:28.740 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+20:50:28.740 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+20:50:28.741 [main] INFO org.testcontainers.DockerClientFactory -- ?? Docker server version should be at least 1.6.0
+20:50:28.742 [main] INFO tc.postgres:16-alpine -- Creating container for image: postgres:16-alpine
+20:50:28.801 [main] INFO tc.postgres:16-alpine -- Container postgres:16-alpine is starting: b49420a5b377b3995b06ea61b111adcfe587cf89d199101b1185df30a2b7b12c
+20:50:30.237 [main] INFO tc.postgres:16-alpine -- Container postgres:16-alpine started in PT1.4950854S
+20:50:30.238 [main] INFO tc.postgres:16-alpine -- Container is started (JDBC URL: jdbc:postgresql://localhost:54315/itam_test?loggerLevel=OFF)
+20:50:30.316 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+20:50:31 INFO  [main] c.vanh.itam.auth.AuthIntegrationTest - Starting AuthIntegrationTest using Java 21.0.11 with PID 20728 (started by anhde in D:\PROJECTS_VANH\itam-system\backend)
+20:50:31 INFO  [main] c.vanh.itam.auth.AuthIntegrationTest - The following 1 profile is active: "test"
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+20:50:39 INFO  [main] org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:54315/itam_test?loggerLevel=OFF (PostgreSQL 16.14)
+20:50:39 INFO  [main] o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+20:50:39 INFO  [main] o.f.core.internal.command.DbValidate - Successfully validated 20 migrations (execution time 00:00.124s)
+20:50:40 INFO  [main] o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - init roles"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - init branches"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - init categories"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - init departments"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "5 - init employees"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "6 - alter departments add manager fk"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "7 - init refresh tokens"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "8 - init assets"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "9 - init asset images"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "10 - init requests"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "11 - init asset assignment history"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "12 - init maintenance records"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "13 - init audit sessions"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "14 - init audit scans"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "15 - init discrepancies"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "16 - init notifications"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "17 - create indexes"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "18 - seed roles"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "19 - seed demo data"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "20 - test disable must change password"
+20:50:40 INFO  [main] o.f.core.internal.command.DbMigrate - Successfully applied 20 migrations to schema "public", now at version v20 (execution time 00:00.299s)
+20:50:41 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+20:50:51 WARN  [main] o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 980cdafb-9f88-4e93-b2e5-ecdd9af713aa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+20:50:53 INFO  [main] c.vanh.itam.auth.AuthIntegrationTest - Started AuthIntegrationTest in 23.456 seconds (process running for 28.728)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.96 s -- in POST /auth/logout
+[INFO] Running RBAC ù 403 khi sai role
+20:50:55 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:55 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Access denied: Access Denied
+20:50:55 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:55 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Access denied: Access Denied
+20:50:55 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:55 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Access denied: Access Denied
+20:50:56 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:56 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Access denied: Access Denied
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.741 s -- in RBAC ù 403 khi sai role
+[INFO] Running POST /auth/login
+20:50:56 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:50:56 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:56 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:56 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:56 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Validation failed: fieldsCount=1, fields=[password]
+20:50:56 WARN  [main] c.v.i.auth.service.AuthServiceImpl - Login failed ù wrong password: email=admin@itam.local
+20:50:56 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Business/Client error: code=AUTH_INVALID_CREDENTIALS, status=401 UNAUTHORIZED, message=Email ho?c m?t kh?u kh⌠ng ?·ng
+20:50:57 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Business/Client error: code=AUTH_INVALID_CREDENTIALS, status=401 UNAUTHORIZED, message=Email ho?c m?t kh?u kh⌠ng ?·ng
+20:50:57 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Validation failed: fieldsCount=1, fields=[email]
+20:50:57 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.123 s -- in POST /auth/login
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.15 s -- in AuthIntegrationTest ù Login, Refresh, RBAC
+[INFO] Running com.vanh.itam.ItamApplicationTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 s -- in com.vanh.itam.ItamApplicationTests
+[INFO] Running RequestWorkflowIntegrationTest ù Full 3-role workflow
+20:50:57 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:57 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:57 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:57 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:50:58 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request created: id=1, type=ASSIGN, assetId=1, employeeId=5
+20:50:58 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:58 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:58 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:58 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:50:58 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Business/Client error: code=ASSET_NOT_AVAILABLE, status=409 CONFLICT, message=Thi?t b? ID 1 hi?n kh⌠ng kh? d?ng (?π gi? ch? ho?c kh⌠ng ? tr?ng thßi AVAILABLE)
+20:50:58 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request approved: requestId=1, managerId=3
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:50:59 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:50:59 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Business/Client error: code=REQUEST_ALREADY_PROCESSED, status=409 CONFLICT, message=YΩu c?u ?π ???c x? l² tr??c ?≤
+20:51:00 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:00 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:00 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:00 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:51:00 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request fulfilled: requestId=1, type=ASSIGN, itStaffId=2
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/auth/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"62"]
+             Body = {"email": "employee1@itam.local", "password": "Employee@123"}
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.auth.controller.AuthController
+           Method = com.vanh.itam.auth.controller.AuthController#login(LoginRequest, String, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Set-Cookie:"refreshToken=7a5c21b6-a8a4-43af-9720-c2125035b3a5; Path=/api/v1/auth; Max-Age=2592000; Expires=Fri, 31 Jul 2026 13:51:00 GMT; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6IkVNUExPWUVFIiwiZW1haWwiOiJlbXBsb3llZTFAaXRhbS5sb2NhbCIsInN1YiI6IjUiLCJpYXQiOjE3ODI5MTM4NjAsImV4cCI6MTc4MjkxNTY2MH0.NAasNwnNPW5oxuviSua3wd6dl_TzFlfINRbN9ciOTkI","expiresIn":1800,"user":{"id":5,"email":"employee1@itam.local","fullName":"Ph?m Th? Lan","role":"EMPLOYEE","branchId":1,"mustChangePassword":false}},"meta":{"timestamp":"2026-07-01T13:51:00.160998400Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@500e15ee name = 'refreshToken', value = '7a5c21b6-a8a4-43af-9720-c2125035b3a5', comment = [null], domain = [null], maxAge = 2592000, path = '/api/v1/auth', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/auth/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"62"]
+             Body = {"email": "manager.kd@itam.local", "password": "Manager@123"}
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.auth.controller.AuthController
+           Method = com.vanh.itam.auth.controller.AuthController#login(LoginRequest, String, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Set-Cookie:"refreshToken=bfe7a24b-bd0f-4d26-aaa8-2d8be6feb640; Path=/api/v1/auth; Max-Age=2592000; Expires=Fri, 31 Jul 2026 13:51:00 GMT; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6Ik1BTkFHRVIiLCJlbWFpbCI6Im1hbmFnZXIua2RAaXRhbS5sb2NhbCIsInN1YiI6IjMiLCJpYXQiOjE3ODI5MTM4NjAsImV4cCI6MTc4MjkxNTY2MH0.2ZY1SLPbtOpDAhMFlup9HOY7ju2LwLgQnAI5GgqAsik","expiresIn":1800,"user":{"id":3,"email":"manager.kd@itam.local","fullName":"Tr?n Th? Mai","role":"MANAGER","branchId":1,"mustChangePassword":false}},"meta":{"timestamp":"2026-07-01T13:51:00.425275700Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@7a1d454d name = 'refreshToken', value = 'bfe7a24b-bd0f-4d26-aaa8-2d8be6feb640', comment = [null], domain = [null], maxAge = 2592000, path = '/api/v1/auth', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/auth/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"60"]
+             Body = {"email": "it.staff@itam.local", "password": "Itstaff@123"}
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.auth.controller.AuthController
+           Method = com.vanh.itam.auth.controller.AuthController#login(LoginRequest, String, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Set-Cookie:"refreshToken=75c809ca-8c31-4b32-b1bb-1ff8f2e005fd; Path=/api/v1/auth; Max-Age=2592000; Expires=Fri, 31 Jul 2026 13:51:00 GMT; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6IklUX1NUQUZGIiwiZW1haWwiOiJpdC5zdGFmZkBpdGFtLmxvY2FsIiwic3ViIjoiMiIsImlhdCI6MTc4MjkxMzg2MCwiZXhwIjoxNzgyOTE1NjYwfQ.aFGL7PtAR7cuCNu5sGTNqm295TPOTW5Pu508-cvz2qQ","expiresIn":1800,"user":{"id":2,"email":"it.staff@itam.local","fullName":"Nguy?n V?n H∙ng","role":"IT_STAFF","branchId":1,"mustChangePassword":false}},"meta":{"timestamp":"2026-07-01T13:51:00.631758300Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@1b5f8688 name = 'refreshToken', value = '75c809ca-8c31-4b32-b1bb-1ff8f2e005fd', comment = [null], domain = [null], maxAge = 2592000, path = '/api/v1/auth', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/auth/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"58"]
+             Body = {"email": "admin@itam.local", "password": "Admin@123456"}
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.auth.controller.AuthController
+           Method = com.vanh.itam.auth.controller.AuthController#login(LoginRequest, String, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Set-Cookie:"refreshToken=693ec5a2-a40d-4ac4-b199-182eb7bc2262; Path=/api/v1/auth; Max-Age=2592000; Expires=Fri, 31 Jul 2026 13:51:00 GMT; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBpdGFtLmxvY2FsIiwic3ViIjoiMSIsImlhdCI6MTc4MjkxMzg2MCwiZXhwIjoxNzgyOTE1NjYwfQ.wMHYHVmeYfdWhhxtlgIUPrN6MOLX9a6An7gX3imc5P8","expiresIn":1800,"user":{"id":1,"email":"admin@itam.local","fullName":"Qu?n tr? h? th?ng","role":"ADMIN","branchId":1,"mustChangePassword":false}},"meta":{"timestamp":"2026-07-01T13:51:00.769823800Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@43fbbb86 name = 'refreshToken', value = '693ec5a2-a40d-4ac4-b199-182eb7bc2262', comment = [null], domain = [null], maxAge = 2592000, path = '/api/v1/auth', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/requests/1/fulfill
+       Parameters = {}
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6IklUX1NUQUZGIiwiZW1haWwiOiJpdC5zdGFmZkBpdGFtLmxvY2FsIiwic3ViIjoiMiIsImlhdCI6MTc4MjkxMzg2MCwiZXhwIjoxNzgyOTE1NjYwfQ.aFGL7PtAR7cuCNu5sGTNqm295TPOTW5Pu508-cvz2qQ"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.request.controller.RequestController
+           Method = com.vanh.itam.request.controller.RequestController#fulfill(Long, CustomUserDetails)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"id":1,"type":"ASSIGN","status":"FULFILLED","assetId":1,"assetCode":"HN-LAP-0001","assetName":"Dell Latitude 5440","employeeId":5,"employeeName":"Ph?m Th? Lan","approvedById":3,"approvedByName":"Tr?n Th? Mai","fulfilledById":2,"fulfilledByName":"Nguy?n V?n H∙ng","note":"C?n laptop cho d? ßn m?i","rejectionReason":null,"approvedAt":"2026-07-01T13:50:59.366573Z","fulfilledAt":"2026-07-01T13:51:00.818269Z","createdAt":"2026-07-01T13:50:58.060866Z","updatedAt":"2026-07-01T13:50:59.390343Z"},"meta":{"timestamp":"2026-07-01T13:51:00.850905900Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/v1/assets/1
+       Parameters = {}
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzI1NiJ9.eyJicmFuY2hJZCI6MSwicm9sZSI6IklUX1NUQUZGIiwiZW1haWwiOiJpdC5zdGFmZkBpdGFtLmxvY2FsIiwic3ViIjoiMiIsImlhdCI6MTc4MjkxMzg2MCwiZXhwIjoxNzgyOTE1NjYwfQ.aFGL7PtAR7cuCNu5sGTNqm295TPOTW5Pu508-cvz2qQ"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.vanh.itam.asset.controller.AssetController
+           Method = com.vanh.itam.asset.controller.AssetController#getById(Long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"success":true,"data":{"id":1,"code":"HN-LAP-0001","name":"Dell Latitude 5440","categoryId":1,"categoryName":"Laptop","branchId":1,"branchName":"Chi nhßnh Hα N?i","status":"ASSIGNED","assignedToId":5,"assignedToName":"Ph?m Th? Lan","purchaseDate":"2024-01-15","value":22000000.00,"createdAt":"2026-07-01T13:50:40.760572Z","updatedAt":"2026-07-01T13:51:00.835864Z"},"meta":{"timestamp":"2026-07-01T13:51:00.870750600Z"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:51:01 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request created: id=2, type=ASSIGN, assetId=2, employeeId=5
+20:51:01 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request rejected: requestId=2, managerId=3, reason=Thi?t b? ?ang ???c chu?n b? cho ph≥ng khßc
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:01 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request created: id=3, type=ASSIGN, assetId=3, employeeId=5
+20:51:02 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request cancelled: requestId=3, employeeId=5
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:51:02 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=4, email=manager.hc@itam.local, role=MANAGER, device=Unknown Device
+20:51:03 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request created: id=4, type=ASSIGN, assetId=2, employeeId=5
+20:51:03 WARN  [main] c.v.i.r.service.RequestServiceImpl - Manager 4 attempted to approve request outside their department scope
+20:51:03 WARN  [main] c.v.i.c.e.GlobalExceptionHandler - Business/Client error: code=AUTH_OUT_OF_SCOPE, status=403 FORBIDDEN, message=B?n kh⌠ng c≤ quy?n duy?t yΩu c?u c?a nhΓn viΩn kh⌠ng thu?c ph≥ng ban m∞nh qu?n l²
+20:51:03 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:03 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:03 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:03 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+20:51:03 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=5, email=employee1@itam.local, role=EMPLOYEE, device=Unknown Device
+20:51:04 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=3, email=manager.kd@itam.local, role=MANAGER, device=Unknown Device
+20:51:04 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=2, email=it.staff@itam.local, role=IT_STAFF, device=Unknown Device
+20:51:04 INFO  [main] c.v.i.auth.service.AuthServiceImpl - Login successful: employeeId=1, email=admin@itam.local, role=ADMIN, device=Unknown Device
+[ERROR] Tests run: 10, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 7.086 s <<< FAILURE! -- in RequestWorkflowIntegrationTest ù Full 3-role workflow
+[ERROR] com.vanh.itam.request.RequestWorkflowIntegrationTest.step5_itStaff_fulfillRequest -- Time elapsed: 0.901 s <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "$.data.assignedTo"
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:351)
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValueIsNotEmpty(JsonPathExpectationsHelper.java:287)
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$isNotEmpty$6(JsonPathResultMatchers.java:163)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.vanh.itam.request.RequestWorkflowIntegrationTest.step5_itStaff_fulfillRequest(RequestWorkflowIntegrationTest.java:159)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: com.jayway.jsonpath.PathNotFoundException: No results for path: $['data']['assignedTo']
+
+[INFO] Running RequestServiceImpl ù Unit Tests
+[INFO] Running getById()
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.850 s -- in getById()
+[INFO] Running create()
+20:51:05 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request created: id=1, type=ASSIGN, assetId=1, employeeId=5
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in create()
+[INFO] Running cancel()
+20:51:05 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request cancelled: requestId=1, employeeId=5
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in cancel()
+[INFO] Running fulfill()
+20:51:05 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request fulfilled: requestId=1, type=ASSIGN, itStaffId=20
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in fulfill()
+[INFO] Running reject()
+20:51:05 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request rejected: requestId=1, managerId=10, reason=Thi?t b? ?π h?t
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in reject()
+[INFO] Running approve()
+20:51:05 WARN  [main] c.v.i.r.service.RequestServiceImpl - Manager 99 attempted to approve request outside their department scope
+20:51:05 INFO  [main] c.v.i.r.service.RequestServiceImpl - Request approved: requestId=1, managerId=10
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.055 s -- in approve()
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.067 s -- in RequestServiceImpl ù Unit Tests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   RequestWorkflowIntegrationTest.step5_itStaff_fulfillRequest:159 No value at JSON path "$.data.assignedTo"
+[INFO] 
+[ERROR] Tests run: 53, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  42.944 s
+[INFO] Finished at: 2026-07-01T20:51:06+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project itam: There are test failures.
+[ERROR] 
+[ERROR] See D:\PROJECTS_VANH\itam-system\backend\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

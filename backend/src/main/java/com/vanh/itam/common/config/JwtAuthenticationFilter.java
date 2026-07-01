@@ -56,7 +56,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // Chỉ set authentication nếu SecurityContext chưa có (tránh overwrite)
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
-                Employee employee = employeeRepository.findById(employeeId).orElse(null);
+                // JOIN FETCH role + branch trong 1 query — tránh LazyInitializationException
+                // vì filter chạy ngoài transaction context, lazy proxy không thể initialize
+                Employee employee = employeeRepository.findByIdWithRoleAndBranch(employeeId).orElse(null);
 
                 // Employee không tồn tại hoặc đã bị soft-delete
                 if (employee == null || employee.getDeletedAt() != null) {

@@ -13,8 +13,12 @@ import java.util.Optional;
 
 public interface AssetRepository extends JpaRepository<Asset, Long> {
 
-    /** Tìm asset theo ID, chưa bị soft-delete */
-    @Query("SELECT a FROM Asset a WHERE a.id = :id AND a.deletedAt IS NULL")
+    /** Tìm asset theo ID, chưa bị soft-delete — JOIN FETCH để tránh LazyInitializationException khi mapper truy cập */
+    @Query("SELECT a FROM Asset a " +
+           "JOIN FETCH a.category " +
+           "JOIN FETCH a.branch " +
+           "LEFT JOIN FETCH a.assignedTo " +
+           "WHERE a.id = :id AND a.deletedAt IS NULL")
     Optional<Asset> findActiveById(@Param("id") Long id);
 
     /** Tìm asset theo mã code */
@@ -22,7 +26,16 @@ public interface AssetRepository extends JpaRepository<Asset, Long> {
     Optional<Asset> findByCode(@Param("code") String code);
 
     /** Danh sách asset theo chi nhánh, chưa bị soft-delete, có phân trang + filter */
-    @Query("SELECT a FROM Asset a WHERE a.deletedAt IS NULL " +
+    @Query(value = "SELECT a FROM Asset a " +
+           "JOIN FETCH a.category " +
+           "JOIN FETCH a.branch " +
+           "LEFT JOIN FETCH a.assignedTo " +
+           "WHERE a.deletedAt IS NULL " +
+           "AND (:branchId IS NULL OR a.branch.id = :branchId) " +
+           "AND (:status IS NULL OR a.status = :status) " +
+           "AND (:categoryId IS NULL OR a.category.id = :categoryId) " +
+           "AND (:assignedToId IS NULL OR a.assignedTo.id = :assignedToId)",
+           countQuery = "SELECT COUNT(a) FROM Asset a WHERE a.deletedAt IS NULL " +
            "AND (:branchId IS NULL OR a.branch.id = :branchId) " +
            "AND (:status IS NULL OR a.status = :status) " +
            "AND (:categoryId IS NULL OR a.category.id = :categoryId) " +

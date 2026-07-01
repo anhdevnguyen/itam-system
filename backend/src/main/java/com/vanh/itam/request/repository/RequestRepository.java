@@ -11,11 +11,25 @@ import org.springframework.data.repository.query.Param;
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
     /** Tìm request theo ID chưa soft-delete */
-    @Query("SELECT r FROM Request r WHERE r.id = :id AND r.deletedAt IS NULL")
+    @Query("SELECT r FROM Request r " +
+           "JOIN FETCH r.asset " +
+           "JOIN FETCH r.employee " +
+           "LEFT JOIN FETCH r.approvedBy " +
+           "LEFT JOIN FETCH r.fulfilledBy " +
+           "WHERE r.id = :id AND r.deletedAt IS NULL")
     java.util.Optional<Request> findActiveById(@Param("id") Long id);
 
     /** Danh sách request có phân trang + filter */
-    @Query("SELECT r FROM Request r WHERE r.deletedAt IS NULL " +
+    @Query(value = "SELECT r FROM Request r " +
+           "JOIN FETCH r.asset " +
+           "JOIN FETCH r.employee " +
+           "LEFT JOIN FETCH r.approvedBy " +
+           "LEFT JOIN FETCH r.fulfilledBy " +
+           "WHERE r.deletedAt IS NULL " +
+           "AND (:status IS NULL OR r.status = :status) " +
+           "AND (:employeeId IS NULL OR r.employee.id = :employeeId) " +
+           "AND (:branchId IS NULL OR r.asset.branch.id = :branchId)",
+           countQuery = "SELECT COUNT(r) FROM Request r WHERE r.deletedAt IS NULL " +
            "AND (:status IS NULL OR r.status = :status) " +
            "AND (:employeeId IS NULL OR r.employee.id = :employeeId) " +
            "AND (:branchId IS NULL OR r.asset.branch.id = :branchId)")

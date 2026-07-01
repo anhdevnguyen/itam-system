@@ -33,6 +33,7 @@ public class Discrepancy extends BaseEntity {
     @Column(nullable = false, length = 20)
     private DiscrepancyType type;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private DiscrepancyStatus status = DiscrepancyStatus.OPEN;

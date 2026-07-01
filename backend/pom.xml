@@ -245,6 +245,55 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <!--
+                maven-surefire-plugin:
+                1. useModulePath=false  — tắt module path để tránh classpath warning "Boot Manifest-JAR"
+                2. includes **/*Test*, **/*Tests*, **/*IT* — nhận diện đủ tên class
+                3. JUnit Platform mặc định của Surefire 3.x KHÔNG discover @Nested class
+                   nếu outer class không có @Test method nào. Fix: thêm listener
+                   junit.jupiter.extensions.autodetection.enabled=true và chạy qua
+                   JUnit Platform console → Surefire 3.x với JUnit 5.9+ tự động chạy @Nested
+                   khi outer class là test class hợp lệ (có @DisplayName hoặc @Nested bên trong)
+                4. forkedProcessExitTimeoutInSeconds=60 — cho phép JVM test (Testcontainers +
+                   Tomcat threads) đủ thời gian dừng sạch trước khi Surefire force-kill
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Tắt module path — tránh classpath issue với Spring Boot fat JAR -->
+                    <useModulePath>false</useModulePath>
+
+                    <!-- Bao gồm tất cả class test thông thường -->
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
+
+                    <!--
+                        Kích hoạt JUnit Platform để Surefire discover @Nested test classes.
+                        junit.jupiter.extensions.autodetection.enabled không đủ — cần
+                        enable phát hiện nested class thông qua property này.
+                    -->
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.testclass.order.default=org.junit.jupiter.api.ClassOrderer$OrderAnnotation
+                        </configurationParameters>
+                    </properties>
+
+                    <!--
+                        Cho JVM fork thêm 60s để Testcontainers + HikariPool + Tomcat
+                        dừng sạch trước khi Surefire force-kill. Mặc định là 30s — quá
+                        ngắn với Integration Test dùng @SpringBootTest + RANDOM_PORT.
+                    -->
+                    <forkedProcessExitTimeoutInSeconds>60</forkedProcessExitTimeoutInSeconds>
+
+                    <!-- JVM args cho forked test process -->
+                    <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

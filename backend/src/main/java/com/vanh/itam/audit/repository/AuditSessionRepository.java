@@ -14,10 +14,18 @@ import java.util.Optional;
 
 public interface AuditSessionRepository extends JpaRepository<AuditSession, Long> {
 
-    @Query("SELECT s FROM AuditSession s WHERE s.id = :id AND s.deletedAt IS NULL")
+    @Query("SELECT s FROM AuditSession s " +
+           "JOIN FETCH s.branch " +
+           "JOIN FETCH s.createdBy " +
+           "WHERE s.id = :id AND s.deletedAt IS NULL")
     Optional<AuditSession> findActiveById(@Param("id") Long id);
 
-    @Query("SELECT s FROM AuditSession s WHERE s.deletedAt IS NULL " +
+    @Query(value = "SELECT s FROM AuditSession s " +
+           "JOIN FETCH s.branch " +
+           "JOIN FETCH s.createdBy " +
+           "WHERE s.deletedAt IS NULL " +
+           "AND (:branchId IS NULL OR s.branch.id = :branchId)",
+           countQuery = "SELECT COUNT(s) FROM AuditSession s WHERE s.deletedAt IS NULL " +
            "AND (:branchId IS NULL OR s.branch.id = :branchId)")
     Page<AuditSession> findAllActive(@Param("branchId") Long branchId, Pageable pageable);
 

@@ -12,10 +12,21 @@ import java.util.Optional;
 
 public interface DiscrepancyRepository extends JpaRepository<Discrepancy, Long> {
 
-    @Query("SELECT d FROM Discrepancy d WHERE d.id = :id AND d.deletedAt IS NULL")
+    @Query("SELECT d FROM Discrepancy d " +
+           "JOIN FETCH d.asset " +
+           "JOIN FETCH d.auditSession " +
+           "LEFT JOIN FETCH d.resolvedBy " +
+           "WHERE d.id = :id AND d.deletedAt IS NULL")
     Optional<Discrepancy> findActiveById(@Param("id") Long id);
 
-    @Query("SELECT d FROM Discrepancy d WHERE d.auditSession.id = :sessionId AND d.deletedAt IS NULL " +
+    @Query(value = "SELECT d FROM Discrepancy d " +
+           "JOIN FETCH d.asset " +
+           "JOIN FETCH d.auditSession " +
+           "LEFT JOIN FETCH d.resolvedBy " +
+           "WHERE d.auditSession.id = :sessionId AND d.deletedAt IS NULL " +
+           "AND (:status IS NULL OR d.status = :status)",
+           countQuery = "SELECT COUNT(d) FROM Discrepancy d " +
+           "WHERE d.auditSession.id = :sessionId AND d.deletedAt IS NULL " +
            "AND (:status IS NULL OR d.status = :status)")
     Page<Discrepancy> findBySession(
             @Param("sessionId") Long sessionId,

@@ -39,10 +39,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setAccessToken(accessToken);
 
         // Lấy thông tin user từ /employees/me
-        const meResponse = await apiClient.get<ApiResponse<UserInfo>>('/employees/me', {
+        // EmployeeResponse trả flat fields: roleCode, branchId, branchName...
+        // cần map sang UserInfo shape: role, branchId, mustChangePassword
+        const meResponse = await apiClient.get<ApiResponse<{
+          id: number;
+          email: string;
+          fullName: string;
+          roleCode: string;
+          branchId: number;
+          mustChangePassword: boolean;
+        }>>('/employees/me', {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
-        const user = meResponse.data.data!;
+        const me = meResponse.data.data!;
+
+        const user: UserInfo = {
+          id: me.id,
+          email: me.email,
+          fullName: me.fullName,
+          role: me.roleCode as UserInfo['role'],
+          branchId: me.branchId,
+          mustChangePassword: me.mustChangePassword,
+        };
 
         setState({
           user,
@@ -109,7 +127,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const response = await apiClient.post<ApiResponse<TokenResponse>>('/auth/refresh');
       const { accessToken } = response.data.data!;
       setAccessToken(accessToken);
-      setState((prev) => ({ ...prev, accessToken }));
+
+      // Fetch lại user để cập nhật mustChangePassword (quan trọng sau khi đổi mật khẩu)
+      const meResponse = await apiClient.get<ApiResponse<{
+        id: number;
+        email: string;
+        fullName: string;
+        roleCode: string;
+        branchId: number;
+        mustChangePassword: boolean;
+      }>>('/employees/me', {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const me = meResponse.data.data!;
+      const user: UserInfo = {
+        id: me.id,
+        email: me.email,
+        fullName: me.fullName,
+        role: me.roleCode as UserInfo['role'],
+        branchId: me.branchId,
+        mustChangePassword: me.mustChangePassword,
+      };
+
+      setState((prev) => ({ ...prev, accessToken, user }));
       return accessToken;
     } catch {
       setAccessToken(null);

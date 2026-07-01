@@ -15,4 +15,5 @@ public interface NotificationService {
     Page<NotificationResponse> getMyNotifications(Long employeeId, Pageable pageable);
     long countUnread(Long employeeId);
     void markAsRead(Long notificationId, Long employeeId);
+    void markAllAsRead(Long employeeId);
 }

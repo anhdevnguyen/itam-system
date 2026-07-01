@@ -49,7 +49,7 @@ INSERT INTO departments (name, branch_id) VALUES
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'admin@itam.local',
-    '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',  -- Admin@123456
+    '$2a$10$ZzAb8N.rfxruluWrcdKgvuPsjwEti7CyoKY2QNAKzopfSB9vGQaqm',  -- Admin@123456
     'Quản trị hệ thống',
     (SELECT id FROM roles WHERE code = 'ADMIN'),
     (SELECT id FROM branches WHERE code = 'HN'),
@@ -61,7 +61,7 @@ VALUES (
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'it.staff@itam.local',
-    '$2a$10$TbNlpCZJMlxLVrHlO6Eo3O0HhWMr6yBCFkbVMKBVFAsCHSilcpJti',  -- Itstaff@123
+    '$2a$10$wbjLZSeeOKEyoBczdscixeDBYg64wYkCiqDQCWH1rZutUCZktLcMC',  -- Itstaff@123
     'Nguyễn Văn Hùng',
     (SELECT id FROM roles WHERE code = 'IT_STAFF'),
     (SELECT id FROM branches WHERE code = 'HN'),
@@ -73,7 +73,7 @@ VALUES (
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'manager.kd@itam.local',
-    '$2a$10$KhSlvnajUCbRfmL1e4s3aeY8tN1XDCpENf3wU1kfPfAHvAaHPX/aq',  -- Manager@123
+    '$2a$10$9XcMLuREaiITDOOPEi3UTuxWt0MC2gCh0rfcaHGVLwyWlV5UmiF9q',  -- Manager@123
     'Trần Thị Mai',
     (SELECT id FROM roles WHERE code = 'MANAGER'),
     (SELECT id FROM branches WHERE code = 'HN'),
@@ -85,7 +85,7 @@ VALUES (
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'manager.hc@itam.local',
-    '$2a$10$KhSlvnajUCbRfmL1e4s3aeY8tN1XDCpENf3wU1kfPfAHvAaHPX/aq',  -- Manager@123
+    '$2a$10$9t0N7WmWoljmnM4IkF1MdOYuHPLU4Io.sYfWG0LCpjH6jGnnEB/Fa',  -- Manager@123
     'Lê Quang Nam',
     (SELECT id FROM roles WHERE code = 'MANAGER'),
     (SELECT id FROM branches WHERE code = 'HN'),
@@ -97,7 +97,7 @@ VALUES (
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'employee1@itam.local',
-    '$2a$10$e0MYzXyjpJS7Yy6oB1o5Le7VsSQhEKX33zRnE7kFPmj0xJJXzJwWG',  -- Employee@123
+    '$2a$10$vg4Ii0qZqffwIEVSR4DWt.3kcIhnH.DB.LF3abv51Pc4v8FXgiBlC',  -- Employee@123
     'Phạm Thị Lan',
     (SELECT id FROM roles WHERE code = 'EMPLOYEE'),
     (SELECT id FROM branches WHERE code = 'HN'),
@@ -109,7 +109,7 @@ VALUES (
 INSERT INTO employees (email, password_hash, full_name, role_id, branch_id, department_id, must_change_password)
 VALUES (
     'employee2@itam.local',
-    '$2a$10$e0MYzXyjpJS7Yy6oB1o5Le7VsSQhEKX33zRnE7kFPmj0xJJXzJwWG',  -- Employee@123
+    '$2a$10$fRRIM48OxeB.E8Nr/3vQ6uUOXR8pP3M15cdF2jYun11HYTp2e2eom',  -- Employee@123
     'Đỗ Minh Tuấn',
     (SELECT id FROM roles WHERE code = 'EMPLOYEE'),
     (SELECT id FROM branches WHERE code = 'HN'),

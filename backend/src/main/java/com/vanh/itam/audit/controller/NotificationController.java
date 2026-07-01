@@ -54,4 +54,12 @@ public class NotificationController {
         notificationService.markAsRead(id, currentUser.getEmployeeId());
         return ResponseEntity.ok(ApiResponse.success());
     }
+
+    @PostMapping("/read-all")
+    @Operation(summary = "Đánh dấu tất cả thông báo là đã đọc")
+    public ResponseEntity<ApiResponse<Void>> markAllAsRead(
+            @AuthenticationPrincipal CustomUserDetails currentUser) {
+        notificationService.markAllAsRead(currentUser.getEmployeeId());
+        return ResponseEntity.ok(ApiResponse.success());
+    }
 }

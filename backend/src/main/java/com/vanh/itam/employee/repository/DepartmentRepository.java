@@ -12,14 +12,25 @@ import java.util.Optional;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
-    @Query("SELECT d FROM Department d WHERE d.deletedAt IS NULL " +
+    @Query("SELECT d FROM Department d " +
+           "JOIN FETCH d.branch " +
+           "LEFT JOIN FETCH d.manager " +
+           "WHERE d.deletedAt IS NULL " +
            "AND (:branchId IS NULL OR d.branch.id = :branchId) ORDER BY d.name")
     List<Department> findAllActive(@Param("branchId") Long branchId);
 
-    @Query("SELECT d FROM Department d WHERE d.id = :id AND d.deletedAt IS NULL")
+    @Query("SELECT d FROM Department d " +
+           "JOIN FETCH d.branch " +
+           "LEFT JOIN FETCH d.manager " +
+           "WHERE d.id = :id AND d.deletedAt IS NULL")
     Optional<Department> findActiveById(@Param("id") Long id);
 
-    @Query("SELECT d FROM Department d WHERE d.deletedAt IS NULL " +
+    @Query(value = "SELECT d FROM Department d " +
+           "JOIN FETCH d.branch " +
+           "LEFT JOIN FETCH d.manager " +
+           "WHERE d.deletedAt IS NULL " +
+           "AND (:branchId IS NULL OR d.branch.id = :branchId)",
+           countQuery = "SELECT COUNT(d) FROM Department d WHERE d.deletedAt IS NULL " +
            "AND (:branchId IS NULL OR d.branch.id = :branchId)")
     Page<Department> findAllActivePaged(@Param("branchId") Long branchId, Pageable pageable);
 

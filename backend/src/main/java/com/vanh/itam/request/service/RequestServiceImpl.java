@@ -107,7 +107,8 @@ public class RequestServiceImpl implements RequestService {
                     employee.getDepartment().getManager().getId(),
                     NotificationType.REQUEST_CREATED,
                     "Nhân viên " + employee.getFullName() + " đã tạo yêu cầu "
-                            + req.getType().name() + " cho thiết bị " + asset.getCode());
+                            + req.getType().name() + " cho thiết bị " + asset.getCode(),
+                    saved.getId());
         }
 
         return requestMapper.toResponse(saved);
@@ -139,7 +140,8 @@ public class RequestServiceImpl implements RequestService {
 
         notificationService.notify(request.getEmployee().getId(), NotificationType.REQUEST_APPROVED,
                 "Yêu cầu " + request.getType().name() + " thiết bị "
-                        + request.getAsset().getCode() + " đã được duyệt");
+                        + request.getAsset().getCode() + " đã được duyệt",
+                requestId);
 
         return requestMapper.toResponse(request);
     }
@@ -170,7 +172,8 @@ public class RequestServiceImpl implements RequestService {
 
         notificationService.notify(request.getEmployee().getId(), NotificationType.REQUEST_REJECTED,
                 "Yêu cầu " + request.getType().name() + " thiết bị "
-                        + request.getAsset().getCode() + " đã bị từ chối: " + req.getRejectionReason());
+                        + request.getAsset().getCode() + " đã bị từ chối: " + req.getRejectionReason(),
+                requestId);
 
         return requestMapper.toResponse(request);
     }
@@ -202,7 +205,8 @@ public class RequestServiceImpl implements RequestService {
 
         notificationService.notify(request.getEmployee().getId(), NotificationType.REQUEST_FULFILLED,
                 "Yêu cầu " + request.getType().name() + " thiết bị "
-                        + asset.getCode() + " đã được thực hiện");
+                        + asset.getCode() + " đã được thực hiện",
+                requestId);
 
         return requestMapper.toResponse(request);
     }

@@ -13,10 +13,18 @@ import java.util.Optional;
 
 public interface MaintenanceRepository extends JpaRepository<MaintenanceRecord, Long> {
 
-    @Query("SELECT m FROM MaintenanceRecord m WHERE m.id = :id AND m.deletedAt IS NULL")
+    @Query("SELECT m FROM MaintenanceRecord m " +
+           "JOIN FETCH m.asset " +
+           "WHERE m.id = :id AND m.deletedAt IS NULL")
     Optional<MaintenanceRecord> findActiveById(@Param("id") Long id);
 
-    @Query("SELECT m FROM MaintenanceRecord m WHERE m.deletedAt IS NULL " +
+    @Query(value = "SELECT m FROM MaintenanceRecord m " +
+           "JOIN FETCH m.asset " +
+           "WHERE m.deletedAt IS NULL " +
+           "AND (:assetId IS NULL OR m.asset.id = :assetId) " +
+           "AND (:status IS NULL OR m.status = :status) " +
+           "AND (:type IS NULL OR m.type = :type)",
+           countQuery = "SELECT COUNT(m) FROM MaintenanceRecord m WHERE m.deletedAt IS NULL " +
            "AND (:assetId IS NULL OR m.asset.id = :assetId) " +
            "AND (:status IS NULL OR m.status = :status) " +
            "AND (:type IS NULL OR m.type = :type)")

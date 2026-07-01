@@ -18,28 +18,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * Filter enforce buộc đổi mật khẩu (must_change_password = true).
  * Khi user có must_change_password = true, chặn mọi API ngoại trừ:
  * - GET  /api/v1/employees/me
  * - PUT  /api/v1/employees/me/change-password
- * - POST /api/v1/auth/logout
- * - POST /api/v1/auth/refresh
+ * - POST /api/v1/auth/* (login, logout, refresh)
+ * - OPTIONS (CORS preflight)
  * Trả 403 với mã AUTH_MUST_CHANGE_PASSWORD theo docs/06-AUTHENTICATION.md mục 10.
  */
 @Component
 @Slf4j
 public class MustChangePasswordFilter extends OncePerRequestFilter {
-
-    private static final Set<String> ALLOWED_PATHS = Set.of(
-            "/api/v1/employees/me",
-            "/api/v1/employees/me/change-password",
-            "/api/v1/auth/logout",
-            "/api/v1/auth/refresh",
-            "/api/v1/auth/login"
-    );
 
     private final ObjectMapper objectMapper;
 
@@ -79,14 +70,15 @@ public class MustChangePasswordFilter extends OncePerRequestFilter {
     }
 
     private boolean isAllowedPath(String path, String method) {
-        // GET /api/v1/employees/me
+        // Luôn cho qua OPTIONS (CORS preflight)
+        if ("OPTIONS".equalsIgnoreCase(method)) return true;
+        // GET /api/v1/employees/me — xem thông tin user hiện tại (cần để frontend biết mustChangePassword)
         if ("GET".equalsIgnoreCase(method) && "/api/v1/employees/me".equals(path)) return true;
-        // PUT /api/v1/employees/me/change-password
+        // PUT /api/v1/employees/me/change-password — endpoint đổi mật khẩu
         if ("PUT".equalsIgnoreCase(method) && "/api/v1/employees/me/change-password".equals(path)) return true;
-        // POST /api/v1/auth/logout hoặc /api/v1/auth/refresh
-        if ("POST".equalsIgnoreCase(method) &&
-                (path.equals("/api/v1/auth/logout") || path.equals("/api/v1/auth/refresh"))) return true;
-        // Swagger, actuator
+        // Auth endpoints
+        if ("POST".equalsIgnoreCase(method) && path.startsWith("/api/v1/auth/")) return true;
+        // Swagger, actuator (dev tools)
         return path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")
                 || path.startsWith("/api-docs") || path.startsWith("/actuator");
     }
